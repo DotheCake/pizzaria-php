@@ -10,7 +10,7 @@
 <body>
     <?php include ("cabecalho.php")?>
     <?php include ("menu.php")?>
-    <main class="bg-light pe-3 ps-3">
+    <main class="row bg-light pe-3 ps-3">
         <div class="row">
             <h2 class="mt-4 h1">A melhor pizza da região</h2>
             <hr>
