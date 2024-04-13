@@ -14,20 +14,41 @@
             <div class="row">
                 <h2 class="mt-4 h1">A melhor pizza da região</h2>
                 <hr>
-                <div class="col text-center">
-                    <img src="calabreza.png" alt="Calabresa">
-                    <p>Calabresa</p>
-                </div>
+                <?php
+                $servidor = "127.0.0.1";
+                $usuario = "root";
+                $senha = "";
+                $bd = "bd_pizza_novo";
+                $port = "3306";
 
-                <div class="col text-center">
-                    <img src="calabreza.png" alt="Calabresa">
-                    <p>Calabresa</p>
-                </div>
+                $conexao = mysqli_connect($servidor,$usuario,$senha,$bd,$port);
 
+                $sql = "select * from pizzas_novo order by qtd_venda desc limit 3";
+
+                $todasAsPizzas = mysqli_query($conexao,$sql);
+                
+              
+                while($umaPizza = mysqli_fetch_assoc($todasAsPizzas)){
+                ?>
                 <div class="col text-center">
-                    <img src="calabreza.png" alt="Calabresa">
-                    <p>Calabresa</p>
+                    <img src="<?php echo $umaPizza ["foto"]?>" alt="<?php echo $umaPizza["nome"] ?>" class="img-fluid">
+                    <p><?php echo $umaPizza["nome"] ?></p>
+                    <?php $i = 0;?>
+                    <p><?php while ($i < $umaPizza["estrelas"]){?>
+                        <img width="20" height="20" src="https://img.icons8.com/color/48/filled-star--v1.png" alt="filled-star--v1"/>
+                        
+                    
+                <?php
+                $i++;
+                    }
+                ?>    
+                </p>
                 </div>
+                <?php
+                
+                }
+                mysqli_close($conexao);
+                ?>
                 <hr>
             </div>
             <div class="row">
@@ -35,11 +56,7 @@
                     <h3>Nossos sabores</h3>
                     <p class="sabores">
                     <?php
-                    $servidor = "10.125.47.28";
-                    $usuario = "pizzaiolo";
-                    $senha = "123";
-                    $bd = "bd_pizza";
-                    $port = "3300";
+                    
 
                     //conexão
                     $conexao = mysqli_connect($servidor, $usuario, $senha, $bd,$port);
